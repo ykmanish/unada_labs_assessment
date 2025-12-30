@@ -1,0 +1,42 @@
+export const planetsData = [
+  {
+    name: 'THERONIX',
+    image: '/theronix.png',
+    galaxy: 'Sombrero',
+    diameter: '56,780 km',
+    dayLength: '12 Earth hours',
+    temperature: '60°C to 90°C',
+    climate: 'Tropical',
+    glowColor: 'rgba(52,211,153,0.6)',
+  },
+  {
+    name: 'ETHERON',
+    image: '/etheron.png',
+    galaxy: 'Andromeda-IV',
+    diameter: '16,400 km',
+    dayLength: '26 Earth hours',
+    temperature: '-20°C to 0°C',
+    climate: 'Polar',
+    glowColor: 'rgba(147,51,234,0.6)',
+  },
+  {
+    name: 'ORIONIS',
+    image: '/orionis.png',
+    galaxy: 'Virgo A',
+    diameter: '120,780 km',
+    dayLength: '4 Earth hours',
+    temperature: '10°C to 40°C',
+    climate: 'Temperate',
+    glowColor: 'rgba(59,130,246,0.6)',
+  },
+  {
+    name: 'LUMENARA',
+    image: '/lumenara.png',
+    galaxy: 'Andromeda-IV',
+    diameter: '11,540 km',
+    dayLength: '5.6 Earth hours',
+    temperature: '10°C to 30°C',
+    climate: 'Tropical',
+    glowColor: 'rgba(249,115,22,0.6)',
+  }
+];

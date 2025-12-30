@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+
+
+@font-face {
+  font-family: "Geist";
+  src: url("./font/geist.ttf") format("truetype");
+  /* Add additional font weights and styles if needed */
+}
+
+@font-face {
+  font-family: "Regular";
+  src: url("./font/regular.otf") format("truetype");
+  /* Add additional font weights and styles if needed */
+}
+
+.newq {
+  font-family: "Geist";
+}
+.small {
+  font-family: "Regular";
+}
+
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
