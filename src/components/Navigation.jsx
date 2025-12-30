@@ -1,7 +1,13 @@
 import { useState } from 'react';
 
-export default function Navigation() {
+export default function Navigation({ onMenuToggle }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    const newState = !mobileMenuOpen;
+    setMobileMenuOpen(newState);
+    onMenuToggle?.(newState);
+  };
 
   return (
     <>
@@ -23,7 +29,7 @@ export default function Navigation() {
         <div className="md:hidden flex items-center justify-between w-full">
           <button 
             className="text-white z-50"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            onClick={toggleMenu}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {mobileMenuOpen ? (
@@ -39,13 +45,13 @@ export default function Navigation() {
       </nav>
 
       {mobileMenuOpen && (
-        <div className="fixed inset-0 bg-[#0f1229]/95 z-40 md:hidden flex flex-col items-center justify-center gap-8 text-white text-lg">
-          <a href="#" className="hover:text-gray-300 transition" onClick={() => setMobileMenuOpen(false)}>Home</a>
-          <a href="#" className="hover:text-gray-300 transition" onClick={() => setMobileMenuOpen(false)}>About</a>
-          <a href="#" className="hover:text-gray-300 transition" onClick={() => setMobileMenuOpen(false)}>Contact</a>
-          <a href="#" className="hover:text-gray-300 transition" onClick={() => setMobileMenuOpen(false)}>Galaxies</a>
-          <a href="#" className="hover:text-gray-300 transition" onClick={() => setMobileMenuOpen(false)}>Solar System</a>
-          <a href="#" className="hover:text-gray-300 transition" onClick={() => setMobileMenuOpen(false)}>Earth</a>
+        <div className="fixed inset-0 bg-[#0f1229]/95 backdrop-blur-md z-40 md:hidden flex flex-col items-center justify-center gap-8 text-white text-lg">
+          <a href="#" className="hover:text-gray-300 transition py-2" onClick={toggleMenu}>Home</a>
+          <a href="#" className="hover:text-gray-300 transition py-2" onClick={toggleMenu}>About</a>
+          <a href="#" className="hover:text-gray-300 transition py-2" onClick={toggleMenu}>Contact</a>
+          <a href="#" className="hover:text-gray-300 transition py-2" onClick={toggleMenu}>Galaxies</a>
+          <a href="#" className="hover:text-gray-300 transition py-2" onClick={toggleMenu}>Solar System</a>
+          <a href="#" className="hover:text-gray-300 transition py-2" onClick={toggleMenu}>Earth</a>
         </div>
       )}
     </>

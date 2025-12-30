@@ -14,6 +14,7 @@ export default function PlanetScroll() {
   const containerRef = useRef(null);
   const [currentPlanetIndex, setCurrentPlanetIndex] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isAnimatingRef = useRef(false);
   const scrollVelocity = useRef(0);
   const animationRef = useRef(null);
@@ -52,9 +53,9 @@ export default function PlanetScroll() {
       // For mobile: only show center planet, hide others
       if (isMobile) {
         if (positionIndex === 0) {
-          x = 0; scale = 1.5; opacity = 1; zIndex = 30; // Increased scale for mobile
+          x = 0; scale = 1.2; opacity = 1; zIndex = 30; // Reduced from 1.5 to 1.2
         } else {
-          x = 0; scale = 0; opacity = 0; zIndex = 0; // Hide other planets
+          x = 0; scale = 0; opacity = 0; zIndex = 0;
         }
       } else {
         // Desktop positioning (original logic)
@@ -200,12 +201,12 @@ export default function PlanetScroll() {
       if (isMobile) {
         if (positionIndex === 0) {
           targetX = 0;
-          targetScale = 1.5; // Increased scale for mobile
+          targetScale = 1.2; // Reduced from 1.5 to 1.2
           targetOpacity = 1;
           targetZIndex = 30;
         } else {
           targetX = 0;
-          targetScale = 0; // Hide other planets
+          targetScale = 0;
           targetOpacity = 0;
           targetZIndex = 0;
         }
@@ -335,7 +336,7 @@ export default function PlanetScroll() {
       ref={containerRef}
       className="fixed inset-0 w-full h-screen overflow-hidden bg-gradient-to-b from-[#0f1229] via-[#1a1545] to-[#0a0e27]"
     >
-      <Navigation />
+      <Navigation onMenuToggle={setMobileMenuOpen} />
       
       <BackgroundEffects 
         glowColor={currentPlanet.glowColor} 
@@ -343,20 +344,28 @@ export default function PlanetScroll() {
         topRightGlowRef={topRightGlowRef}
       />
       
-      <PlanetInfo 
-        currentPlanet={currentPlanet}
-        titleRef={titleRef}
-        infoCardsRef={infoCardsRef}
-      />
+      {/* Add conditional opacity for planet info when menu is open */}
+      <div className={`transition-opacity duration-300 ${
+        mobileMenuOpen && isMobile ? 'opacity-0 pointer-events-none' : 'opacity-100'
+      }`}>
+        <PlanetInfo 
+          currentPlanet={currentPlanet}
+          titleRef={titleRef}
+          infoCardsRef={infoCardsRef}
+        />
+      </div>
       
-      <div className={`absolute inset-0 z-10 flex items-center justify-center ${
-        isMobile ? 'pt-32' : 'pt-32 sm:pt-48 md:pt-56 lg:pt-64'
+      {/* FIXED: Add conditional hiding for planet container when menu is open */}
+      <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${
+        isMobile 
+          ? (mobileMenuOpen ? 'pt-80 opacity-0 pointer-events-none' : 'pt-32 opacity-100')  
+          : 'pt-32 sm:pt-48 md:pt-56 lg:pt-64'
       }`}>
         <OrbitalSystem />
         
-        <div className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${
+        <div className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${
           isMobile 
-            ? 'scale-[0.7]' // Increased scale for mobile
+            ? mobileMenuOpen ? 'scale-50 opacity-0' : 'scale-[0.6] opacity-100' // Reduced from scale-[0.7]
             : 'scale-[0.4] sm:scale-[0.5] md:scale-[0.7] lg:scale-100'
         }`}>
           {planetsData.map((planet, index) => {
@@ -372,21 +381,21 @@ export default function PlanetScroll() {
                 className="absolute will-change-transform"
                 style={{ 
                   left: '0', 
-                  top: isMobile ? '-180px' : '-120px', // Adjusted for mobile
-                  marginLeft: isMobile ? '-300px' : '-250px' // Adjusted for mobile
+                  top: isMobile ? '-150px' : '-120px', // Adjusted from -180px to -150px
+                  marginLeft: isMobile ? '-250px' : '-250px' // Adjusted from -300px to -250px
                 }}
               >
                 <div className="relative">
                   <div
                     ref={(el) => planetImagesRef.current[index] = el}
-                    className={`${isMobile ? 'w-[600px] h-[600px]' : 'w-[500px] h-[500px]'}`} // Larger for mobile
+                    className={`${isMobile ? 'w-[500px] h-[500px]' : 'w-[500px] h-[500px]'}`} // Reduced from 600px to 500px
                   >
                     <img
                       src={planet.image}
                       alt={planet.name}
                       className="rounded-full"
                       style={{
-                        filter: `drop-shadow(0 0 ${isCenter ? (isMobile ? '80px' : '70px') : '35px'} ${planet.glowColor}) brightness(${isCenter ? 1.1 : 0.9})`,
+                        filter: `drop-shadow(0 0 ${isCenter ? (isMobile ? '60px' : '70px') : '35px'} ${planet.glowColor}) brightness(${isCenter ? 1.1 : 0.9})`, // Reduced from 80px to 60px
                       }}
                       priority={isCenter}
                     />
@@ -395,13 +404,13 @@ export default function PlanetScroll() {
                   {isCenter && (
                     <>
                       <div
-                        className="absolute -inset-16 rounded-full blur-3xl -z-10 pointer-events-none"
+                        className="absolute -inset-12 rounded-full blur-2xl -z-10 pointer-events-none" // Reduced from -inset-16 and blur-3xl
                         style={{
                           background: `radial-gradient(circle, ${planet.glowColor.replace('0.6', '0.4')} 0%, transparent 70%)`,
                         }}
                       />
                       <div
-                        className="absolute -inset-24 rounded-full blur-[100px] -z-20 pointer-events-none opacity-40"
+                        className="absolute -inset-20 rounded-full blur-[80px] -z-20 pointer-events-none opacity-40" // Reduced from -inset-24 and blur-[100px]
                         style={{
                           background: `radial-gradient(circle, ${planet.glowColor.replace('0.6', '0.3')} 0%, transparent 60%)`,
                         }}
@@ -428,7 +437,8 @@ export default function PlanetScroll() {
         </div>
       </div>
       
-      <MobileControls />
+      {/* Hide mobile controls when menu is open */}
+      {!mobileMenuOpen && <MobileControls />}
     </div>
   );
 }
