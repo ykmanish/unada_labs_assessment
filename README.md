@@ -1,16 +1,55 @@
-# React + Vite
+<img width="1919" height="903" alt="image" src="https://github.com/user-attachments/assets/783ee936-5713-4705-bd3d-8143fc1fa4e7" />
+<img width="1919" height="903" alt="image" src="https://github.com/user-attachments/assets/5b0f47a8-3e16-4f0b-923d-cc87605982a1" />
+<img width="1919" height="914" alt="image" src="https://github.com/user-attachments/assets/51ff17ad-9c89-4477-966d-468807c12251" />
+<img width="1919" height="908" alt="image" src="https://github.com/user-attachments/assets/8a984621-e294-44c8-9bff-727faa3d0bb8" />
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+# 🌍 PlanetScroll
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+PlanetScroll is an interactive 3D planet carousel built with a **mobile-first approach**, smooth **GSAP animations**, and responsive scaling. Users can scroll or swipe to explore planets with immersive transitions, orbital motion, and glowing visual effects.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Features
+
+- Scroll / swipe navigation between planets  
+- Mobile-first design  
+  - Large centered planet (1.4× scale)  
+  - Side planets hidden for a clean UI  
+- Smooth GSAP transitions & orbital animations  
+- Dynamic glow effects for each planet  
+- Animated planet info panels  
+- Fully responsive across devices  
+
+---
+
+## 🛠️ Tech Stack
+
+- **React.js**
+- **GSAP**
+- **Tailwind CSS**
+- **Vite**
+
+---
+
+## 🚀 Installation & Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/ykmanish/unada_labs_assessment
+cd unada_labs_assessment
+
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+# App runs on http://localhost:5173
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
